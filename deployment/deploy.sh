@@ -1,10 +1,12 @@
-kubectl apply -f namespace.yaml
-kubectl apply -f application-configmap.yaml
-kubectl apply -f db-secret.yaml
-kubectl apply -f postgres.yaml
-kubectl apply -f udaconnect-connection.yaml
-kubectl apply -f udaconnect-frontend.yaml
-kubectl apply -f udaconnect-location-consumer.yaml
-kubectl apply -f udaconnect-location-producer.yaml
-kubectl apply -f udaconnect-persons-grpc.yaml
-kubectl apply -f udaconnect-persons-rest.yaml
+kubectl apply -f deployment/namespace.yaml
+kubectl apply -f deployment/application-configmap.yaml
+kubectl apply -f deployment/db-secret.yaml
+kubectl apply -f deployment/postgres.yaml
+postgres_pod=$(kubectl get --no-headers=true pods -o custom-columns=":metadata.name" -n udaconnect | grep postgres)
+sh scripts/run_db_command.sh "$(postgres_pod)"
+kubectl apply -f deployment/udaconnect-connection.yaml
+kubectl apply -f deployment/udaconnect-frontend.yaml
+kubectl apply -f deployment/udaconnect-location-consumer.yaml
+kubectl apply -f deployment/udaconnect-location-producer.yaml
+kubectl apply -f deployment/udaconnect-persons-grpc.yaml
+kubectl apply -f deployment/udaconnect-persons-rest.yaml
