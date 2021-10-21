@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - image: hemanthkandukuri/location_kafka_producer:v1.0.0
-        name: udaconnect-location_kafka_producer
+        name: udaconnect-location-kafka-producer
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME

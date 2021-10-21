@@ -19,9 +19,9 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: postgres-pv-claim
-  namespace: udaconnect
   labels:
     app: postgres
+  namespace: udaconnect
 spec:
   storageClassName: manual
   accessModes:

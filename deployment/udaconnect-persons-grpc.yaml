@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - image: hemanthkandukuri/persons_api_grpc:v1.0.0
-        name: udaconnect-persons_api_grpc
+        name: udaconnect-persons-api-grpc
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME

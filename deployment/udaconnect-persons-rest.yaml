@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - image: hemanthkandukuri/persons_api_rest:v1.0.0
-        name: udaconnect-persons_api_rest
+        name: udaconnect-persons-api-rest
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME

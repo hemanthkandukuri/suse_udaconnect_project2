@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - image: hemanthkandukuri/location_kafka_consumer:v1.0.0
-        name: udaconnect-location_kafka_consumer
+        name: udaconnect-location-kafka-consumer
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME
