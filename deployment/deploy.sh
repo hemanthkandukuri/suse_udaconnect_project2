@@ -2,7 +2,7 @@ kubectl apply -f deployment/namespace.yaml
 kubectl apply -f deployment/application-configmap.yaml
 kubectl apply -f deployment/db-secret.yaml
 kubectl apply -f deployment/postgres.yaml
-sleep 2m
+sleep 4m
 postgres_pod=$(kubectl get --no-headers=true pods -o custom-columns=":metadata.name" -n udaconnect | grep postgres)
 sh scripts/run_db_command.sh "${postgres_pod}"
 kubectl apply -f deployment/udaconnect-connection.yaml
