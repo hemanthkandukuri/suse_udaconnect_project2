@@ -9,7 +9,7 @@ from shapely.geometry.point import Point
 from sqlalchemy import BigInteger, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.ext.hybrid import hybrid_property
 
-from ..config import db  # noqa
+from ..app import db  # noqa
 
 
 class Person(db.Model):
