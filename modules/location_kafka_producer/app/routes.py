@@ -1,5 +1,5 @@
-def register_routes(api, root="api"):
-    from ..app.location_service import register_routes as register_location
+from .location_service import register_routes as location_service_producer_routes
 
-    # Add routes
-    register_location(api, root=root)
+
+def register_routes(api, root="api"):
+    location_service_producer_routes(api, root=root)

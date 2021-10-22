@@ -1,5 +1,5 @@
-def register_routes(api, app, root="api"):
-    from ..app.persons_app import register_routes as attach_person
+from .persons_app import register_routes as person_rest_routes
 
-    # Add routes
-    attach_person(api, app)
+
+def register_routes(api, app, root="api"):
+    person_rest_routes(api, app)
