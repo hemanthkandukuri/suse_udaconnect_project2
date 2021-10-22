@@ -1,2 +1,3 @@
 # suse_udaconnect_project2
-with docker actions
+with github actions
+added dockerfile changes
