@@ -1,4 +1,4 @@
-from .location_service import register_routes as location_service_producer_routes
+from .src import register_routes as location_service_producer_routes
 
 
 def register_routes(api, root="api"):
