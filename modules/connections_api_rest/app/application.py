@@ -20,6 +20,6 @@ def create_app(env=None):
 
     @app.route("/healthz")
     def health():
-        return jsonify("Okay - healthy")
+        return jsonify("Okay - healthy - Connections REST API")
 
     return app

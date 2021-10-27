@@ -1,4 +1,4 @@
-from .models import Location
+from app.models import Location
 from marshmallow import Schema, fields
 
 

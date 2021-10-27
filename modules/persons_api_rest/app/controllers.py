@@ -4,9 +4,9 @@ from flask import request
 from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource
 
-from .models import Person
-from .schemas import PersonSchema
-from .services import PersonService
+from app.models import Person
+from app.schemas import PersonSchema
+from app.services import PersonService
 
 DATE_FORMAT = "%Y-%m-%d"
 

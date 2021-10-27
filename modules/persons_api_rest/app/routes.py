@@ -1,5 +1,8 @@
-from .src import register_routes as person_rest_routes
+from app.models import Person
+from app.schemas import PersonSchema
 
 
 def register_routes(api, app, root="api"):
-    person_rest_routes(api, app)
+    from app.controllers import api as persons_api
+
+    api.add_namespace(persons_api, path=f"/{root}")

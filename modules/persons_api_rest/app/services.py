@@ -1,8 +1,8 @@
 import logging
 from typing import Dict, List
 
-from ...app import db
-from .models import Person
+from app.application import db
+from app.models import Person
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("person-api")

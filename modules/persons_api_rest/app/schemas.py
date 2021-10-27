@@ -1,6 +1,5 @@
 from marshmallow import Schema, fields
-
-from .models import Person
+from app.models import Person
 
 
 class PersonSchema(Schema):

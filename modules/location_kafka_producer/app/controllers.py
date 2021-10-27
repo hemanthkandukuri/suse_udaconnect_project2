@@ -2,9 +2,9 @@ from flask import request, Response
 from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource
 
-from .models import Location
-from .schemas import LocationSchema
-from .services import LocationService
+from app.models import Location
+from app.schemas import LocationSchema
+from app.services import LocationService
 
 
 DATE_FORMAT = "%Y-%m-%d"

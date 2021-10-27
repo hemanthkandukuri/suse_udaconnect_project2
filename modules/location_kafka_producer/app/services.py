@@ -6,8 +6,8 @@ from typing import Dict
 
 from kafka import KafkaProducer
 
-from ...app import db
-from .models import Location
+from app.application import db
+from app.models import Location
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("connection-producer-api")

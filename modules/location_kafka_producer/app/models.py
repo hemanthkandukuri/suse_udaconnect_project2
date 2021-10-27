@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from app import db  # noqa
+from app.application import db  # noqa
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
 from shapely.geometry.point import Point

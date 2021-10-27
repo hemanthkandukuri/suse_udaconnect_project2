@@ -2,8 +2,8 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_restx import Api
 from flask_sqlalchemy import SQLAlchemy
-from .config import config_by_name
-from .routes import register_routes
+from app.config import config_by_name
+from app.routes import register_routes
 
 db = SQLAlchemy()
 
@@ -20,6 +20,6 @@ def create_app(env=None):
 
     @app.route("/healthz")
     def health():
-        return jsonify("OK - Healthy")
+        return jsonify("OK - Healthy - Location Kafka Producer API")
 
     return app

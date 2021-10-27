@@ -1,5 +1,3 @@
-from .src import register_routes as location_service_producer_routes
-
-
 def register_routes(api, root="api"):
-    location_service_producer_routes(api, root=root)
+    from app.controllers import api as location_kafka_producer
+    api.add_namespace(location_kafka_producer, path=f"/{root}")
