@@ -5,8 +5,8 @@ from flask import request
 from flask_accepts import responds
 from flask_restx import Namespace, Resource
 
-from schemas import ConnectionSchema
-from services import ConnectionService
+from app.schemas import ConnectionSchema
+from app.services import ConnectionService
 
 DATE_FORMAT = "%Y-%m-%d"
 
