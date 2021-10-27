@@ -3,7 +3,7 @@ import os
 from datetime import datetime, timedelta
 from typing import Dict, List
 
-from application import db
+from app.application import db
 from app.models import Connection, Location, Person
 from sqlalchemy.sql import text
 
