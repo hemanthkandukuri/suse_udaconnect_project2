@@ -4,7 +4,7 @@ metadata:
   labels:
     service: udaconnect-persons-rest
   name: udaconnect-persons-rest
-  namespace: udaconnect
+  # namespace: udaconnect
 spec:
   ports:
   - name: "persons-rest-port"
@@ -21,7 +21,7 @@ metadata:
   labels:
     service: udaconnect-persons-rest
   name: udaconnect-persons-rest
-  namespace: udaconnect
+  # namespace: udaconnect
 spec:
   replicas: 1
   selector:
