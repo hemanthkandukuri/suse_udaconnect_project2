@@ -10,7 +10,7 @@ from app.services import PersonService
 
 DATE_FORMAT = "%Y-%m-%d"
 
-api = Namespace("Persons API", description="Connections via geolocation.")  # noqa
+api = Namespace("Persons API", description="Persons REST API implementation")  # noqa
 
 
 # TODO: This needs better exception handling

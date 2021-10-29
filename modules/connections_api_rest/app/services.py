@@ -8,8 +8,8 @@ from app.models import Connection, Location, Person
 from sqlalchemy.sql import text
 
 import grpc
-import app.person_pb2_grpc
-import app.person_pb2
+import app.person_pb2_grpc as person_pb2_grpc
+import app.person_pb2 as person_pb2
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("ConnectionService-api")

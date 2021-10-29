@@ -10,7 +10,7 @@ from app.services import ConnectionService
 
 DATE_FORMAT = "%Y-%m-%d"
 
-api = Namespace("Udaconnect", description="Connections via geolocation.")  # noqa
+api = Namespace("Connections REST API", description="Connections via geolocation.")  # noqa
 
 
 @api.route("/persons/<person_id>/connection")

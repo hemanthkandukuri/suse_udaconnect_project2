@@ -9,7 +9,7 @@ from app.services import LocationService
 
 DATE_FORMAT = "%Y-%m-%d"
 
-api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
+api = Namespace("Location API", description="Loacation API which puts data onto Kafka Producer")  # noqa
 
 
 @api.route("/locations")
