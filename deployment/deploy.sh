@@ -1,4 +1,3 @@
-kubectl apply -f deployment/namespace.yaml
 kubectl apply -f deployment/application-configmap.yaml
 kubectl apply -f deployment/db-secret.yaml
 kubectl apply -f deployment/postgres.yaml

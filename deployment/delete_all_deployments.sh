@@ -1,4 +1,3 @@
-kubectl delete -f deployment/namespace.yaml
 kubectl delete -f deployment/application-configmap.yaml
 kubectl delete -f deployment/db-secret.yaml
 kubectl delete -f deployment/postgres.yaml

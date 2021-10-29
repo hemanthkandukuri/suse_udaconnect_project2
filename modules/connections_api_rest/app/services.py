@@ -5,6 +5,7 @@ from typing import Dict, List
 
 from app.application import db
 from app.models import Connection, Location, Person
+from grpc._channel import _InactiveRpcError
 from sqlalchemy.sql import text
 
 import grpc
@@ -14,7 +15,7 @@ import app.person_pb2 as person_pb2
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("ConnectionService-api")
 
-PERSONS_GRPC_URL = os.environ.get("PERSONS_GRPC_URL", "localhost:30000")
+PERSONS_GRPC_URL = os.environ.get("PERSONS_GRPC_URL", "localhost:30003")
 
 
 class ConnectionService:
@@ -109,8 +110,14 @@ class PersonService:
 
         channel = grpc.insecure_channel(PERSONS_GRPC_URL)
         stub = person_pb2_grpc.PersonServiceStub(channel)
-
-        response = stub.Get(person_pb2.Empty())
+        try:
+            response = stub.Get(person_pb2.Empty())
+        except _InactiveRpcError:
+            channel = grpc.insecure_channel("localhost:30003")
+            stub = person_pb2_grpc.PersonServiceStub(channel)
+            response = stub.Get(person_pb2.Empty())
+        else:
+            print('No exceptions')
 
         for _person in response.persons:
             person_current = Person()
