@@ -14,7 +14,9 @@ import app.person_pb2 as person_pb2
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("ConnectionService-api")
 
-PERSONS_GRPC_URL = os.environ.get("PERSONS_GRPC_URL", "localhost:30003")
+GRPC_HOST = os.environ.get("UDACONNECT_PERSONS_GRPC_SERVICE_HOST")
+GRPC_PORT = os.environ.get("UDACONNECT_PERSONS_GRPC_SERVICE_PORT")
+PERSONS_GRPC_URL = os.environ.get(GRPC_HOST + ':' + GRPC_PORT)
 
 
 class ConnectionService:
@@ -120,6 +122,3 @@ class PersonService:
             persons_array.append(person_current)
 
         return persons_array
-
-
-
