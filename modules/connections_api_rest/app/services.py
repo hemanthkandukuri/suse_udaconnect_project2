@@ -105,21 +105,21 @@ class PersonService:
 
     @staticmethod
     def retrieve_all() -> List[Person]:
-        persons_list = []
+        persons_array = []
 
         channel = grpc.insecure_channel(PERSONS_GRPC_URL)
         stub = person_pb2_grpc.PersonServiceStub(channel)
         response = stub.Get(person_pb2.Empty())
 
-        for _person in response.persons:
+        for _person in response.persons_list:
             person_current = Person()
             person_current.id = _person.id
             person_current.first_name = _person.first_name
             person_current.last_name = _person.last_name
             person_current.company_name = _person.company_name
-            persons_list.append(person_current)
+            persons_array.append(person_current)
 
-        return persons_list
+        return persons_array
 
 
 

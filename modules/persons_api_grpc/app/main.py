@@ -11,40 +11,43 @@ from sqlalchemy.sql import text
 import person_pb2
 import person_pb2_grpc
 
-DB_USER = os.environ["DB_USERNAME"]
-DB_PASS = os.environ["DB_PASSWORD"]
-DB_HOST = os.environ["DB_HOST"]
-DB_PORT = os.environ["DB_PORT"]
-DB_NAME = os.environ["DB_NAME"]
+# DB_USER = os.environ["DB_USERNAME"]
+# DB_PASS = os.environ["DB_PASSWORD"]
+# DB_HOST = os.environ["DB_HOST"]
+# DB_PORT = os.environ["DB_PORT"]
+# DB_NAME = os.environ["DB_NAME"]
 
 
-# DB_USER = "ct_admin"
-# DB_PASS = "wowimsosecure"
-# DB_HOST = "postgres"
-# DB_PORT = "5432"
-# DB_NAME = "geoconnections"
+DB_USER = "ct_admin"
+DB_PASS = "wowimsosecure"
+DB_HOST = "localhost"
+DB_PORT = "30222"
+DB_NAME = "geoconnections"
 
 
 class PersonServicer(person_pb2_grpc.PersonServiceServicer):
     def Get(self, request, context):
         print("A request came to GET Persons on GRPC")
         response = person_pb2.ListOfPersonMessages()
+        print("response", response)
         engine = create_engine(
             f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}",
             echo=True
         )
         conn = engine.connect()
         query = text("SELECT * FROM Person")
-        result = conn.execute(query)
         print("Executed the DB Query on Postgres")
+        result = conn.execute(query)
+        print("Result", result.__dict__)
         for person_row in result:
+            print(person_row)
             person = person_pb2.PersonMessage(
                 id=person_row.id,
                 first_name=person_row.first_name,
                 last_name=person_row.last_name,
                 company_name=person_row.company_name
             )
-            response.persons.append(person)
+            response.persons_list.append(person)
         print(response)
         return response
 
