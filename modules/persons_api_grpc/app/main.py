@@ -59,12 +59,10 @@ class PersonServicer(person_pb2_grpc.PersonServiceServicer):
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
 person_pb2_grpc.add_PersonServiceServicer_to_server(PersonServicer(), server)
 
-# Setting up gRPC on 5001 port, as persons flask api is running on 5000 port
-# NOTE:
-# Need not be a different port, as each service would be on its own pod.
-# only the service exposed from pod should be on different port.
-print("Server starting on port 5001...")
-server.add_insecure_port("[::]:5001")
+# Setting up gRPC on 5000 port
+
+print("Server starting on port 5000...")
+server.add_insecure_port("[::]:5000")
 server.start()
 try:
     while True:
