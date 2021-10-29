@@ -9,7 +9,7 @@ spec:
   ports:
   - name: "persons-grpc-port"
     port: 30003
-    targetPort: 5000
+    targetPort: 5001
   selector:
     service: udaconnect-persons-grpc
   type: ClusterIP

@@ -113,9 +113,7 @@ class PersonService:
         try:
             response = stub.Get(person_pb2.Empty())
         except _InactiveRpcError:
-            channel = grpc.insecure_channel("localhost:30003")
-            stub = person_pb2_grpc.PersonServiceStub(channel)
-            response = stub.Get(person_pb2.Empty())
+            response = try_local_grpc_channel()
         else:
             print('No exceptions')
 
@@ -128,3 +126,11 @@ class PersonService:
             persons_list.append(person_current)
 
         return persons_list
+
+
+def try_local_grpc_channel():
+    channel1 = grpc.insecure_channel("localhost:30003")
+    stub1 = person_pb2_grpc.PersonServiceStub(channel1)
+    response1 = stub1.Get(person_pb2.Empty())
+    return response1
+

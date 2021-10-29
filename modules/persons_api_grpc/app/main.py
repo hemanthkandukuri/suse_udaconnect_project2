@@ -11,15 +11,23 @@ from sqlalchemy.sql import text
 import person_pb2
 import person_pb2_grpc
 
-DB_USER = os.environ["DB_USERNAME"]
-DB_PASS = os.environ["DB_PASSWORD"]
-DB_HOST = os.environ["DB_HOST"]
-DB_PORT = os.environ["DB_PORT"]
-DB_NAME = os.environ["DB_NAME"]
+# DB_USER = os.environ["DB_USERNAME"]
+# DB_PASS = os.environ["DB_PASSWORD"]
+# DB_HOST = os.environ["DB_HOST"]
+# DB_PORT = os.environ["DB_PORT"]
+# DB_NAME = os.environ["DB_NAME"]
+
+
+DB_USER = "ct_admin"
+DB_PASS = "wowimsosecure"
+DB_HOST = "postgres"
+DB_PORT = "5432"
+DB_NAME = "geoconnections"
 
 
 class PersonServicer(person_pb2_grpc.PersonServiceServicer):
     def Get(self, request, context):
+        print("A request came to GET Persons on GRPC")
         response = person_pb2.ListOfPersonMessages()
         engine = create_engine(
             f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}",
@@ -28,7 +36,7 @@ class PersonServicer(person_pb2_grpc.PersonServiceServicer):
         conn = engine.connect()
         query = text("SELECT * FROM Person")
         result = conn.execute(query)
-
+        print("Executed the DB Query on Postgres")
         for person_row in result:
             person = person_pb2.PersonMessage(
                 id=person_row.id,
