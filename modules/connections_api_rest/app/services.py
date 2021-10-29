@@ -8,15 +8,15 @@ from app.models import Connection, Location, Person
 from sqlalchemy.sql import text
 
 import grpc
-import app.person_pb2_grpc as person_pb2_grpc
 import app.person_pb2 as person_pb2
+import app.person_pb2_grpc as person_pb2_grpc
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("ConnectionService-api")
 
 GRPC_HOST = os.environ.get("UDACONNECT_PERSONS_GRPC_SERVICE_HOST")
 GRPC_PORT = os.environ.get("UDACONNECT_PERSONS_GRPC_SERVICE_PORT")
-PERSONS_GRPC_URL = os.environ.get(GRPC_HOST + ':' + GRPC_PORT)
+PERSONS_GRPC_URL = GRPC_HOST + ':' + GRPC_PORT
 
 
 class ConnectionService:
@@ -108,7 +108,7 @@ class PersonService:
     @staticmethod
     def retrieve_all() -> List[Person]:
         persons_array = []
-
+        print('PERSONS_GRPC_URL --------->', PERSONS_GRPC_URL)
         channel = grpc.insecure_channel(PERSONS_GRPC_URL)
         stub = person_pb2_grpc.PersonServiceStub(channel)
         response = stub.Get(person_pb2.Empty())
