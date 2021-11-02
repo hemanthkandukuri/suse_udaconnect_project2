@@ -1,0 +1,99 @@
+swagger: '2.0'
+basePath: /
+paths:
+  /api/persons:
+    get:
+      responses:
+        '200':
+          description: Success
+      operationId: get_persons_resource
+      tags:
+        - Persons API
+    post:
+      responses:
+        '200':
+          description: Success
+      operationId: post_persons_resource
+      tags:
+        - Persons API
+  /api/persons/{person_id}:
+    parameters:
+      - in: path
+        description: Unique ID for a given person_id
+        name: person_id
+        required: true
+        type: string
+    get:
+      responses:
+        '200':
+          description: Success
+      operationId: get_person_resource
+      tags:
+        - Persons API
+  /api/locations/{location_id}:
+    parameters:
+      - in: path
+        description: Unique ID for a given Location
+        name: location_id
+        required: true
+        type: string
+    post:
+      responses:
+        '200':
+          description: Success
+      operationId: post_location_resource
+      tags:
+        - Location API
+    get:
+      responses:
+        '200':
+          description: Success
+      operationId: get_location_resource
+      tags:
+        - Location API
+  /api/persons/{person_id}/connection:
+    parameters:
+      - in: query
+        description: Proximity to a given user in meters
+        name: distance
+        type: string
+      - in: query
+        description: Upper bound of date range
+        name: end_date
+        type: string
+      - in: query
+        description: Lower bound of date range
+        name: start_date
+        type: string
+      - name: person_id
+        in: path
+        required: true
+        type: string
+    get:
+      responses:
+        '200':
+          description: Success
+      operationId: get_connection_data_resource
+      tags:
+        - Connections REST API
+  
+info:
+  title: UdaConnect Services APIs
+  version: 1.0.0
+produces:
+  - application/json
+consumes:
+  - application/json
+tags:
+  - name: Persons API
+    description: Persons REST API implementation
+  - name: Connections REST API
+    description: Connections via geolocation.
+  - name: Location API
+    description: Loacation API which puts data onto Kafka Producer
+ 
+responses:
+  ParseError:
+    description: When a mask can't be parsed
+  MaskError:
+    description: When any error occurs on mask

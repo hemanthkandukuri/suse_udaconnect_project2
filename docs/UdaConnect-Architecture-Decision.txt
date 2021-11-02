@@ -1,0 +1,59 @@
+There are four service components in the Application,
+1. Persons Service
+    To add/get the details of persons
+2. Connections Service
+    To get the connections details of each person
+3. Location Service
+    To add/get location details for a person.
+4. FrontEnd WebApp
+    To interact with the above services and get the details of persons, locations, connections.
+
+Application flow wise, the below is the dependency sequence
+1. FrontEnd WebApp is dependent on the Persons Service and Connection Service
+2. Persons Service is dependent on the Person API definitions
+3. Connection Service is dependent on the Person API definitions and Connection API definitions.
+4. Location Service is dependent on the Location API definitions
+
+Application re-design based on the sequence flow and data retrieval throughput.
+
+#### FrontEnd WebApp
+1. The FrontEnd WebApp communicates to Person API via its REST interface.
+2. The FrontEnd WebApp communicates to Connection API via its REST interface.
+2. The FrontEnd WebApp communicates to Location API via its REST interface.
+
+#### Persons Service - REST
+Person Services is a REST interface, which exposes its endpoints and uses postgres DB to store and retrieve the data.
+
+#### Persons Service - gRPC
+Person Services is also exposed via a gRPC interface, which is similar to the REST implementation, but the gRPC service
+is, implemented, to keep strict message passing structure.
+And also the gRPC Person service is only used by Connection Service. And also since gRPC provides high throughput,
+the calls from Connection Service shall be served swiftly and provides a better design.
+
+#### Connection Service - REST
+Connection Services is a REST interface, which exposes its endpoints and uses postgres DB to store and retrieve the data,
+via the Person gRPC service. It communicates with the gRPC service and gets the each person details of whom the
+connections have been found.
+The idea here to use the Person's gRPC endpoint is for tightly coupled messaged passing, because gRPC works only if the
+message is correct and the function call is done with proper data. This helps out in filtering erroneous cases. And also
+improves the throughput of the connection service to get all the connections details of a specific person, given a time
+period and distance.
+
+
+#### Location Service - REST
+Location Service is called by the frontend to add/retrieve location data. And since the location data is of high
+frequency and high volume, Location Service is split into two components using Message Passing systems.
+1. Location Producer Service - REST -> Exposed as REST interface and works a Kafka Producer and puts messages on
+'location' Topic.
+2. Location Consumer Service -> Works as an internal service(working as Kafka Consumer), which would consume the
+records produced by Kafka Location Producer and stores them in DB.
+NOTE: Kafka and Zookeeper are running in different pods and both the Location Producer and Location consumer
+are using the Kafka topic to produce and consume the data.
+
+The reason here is, assuming the high throughput of location records coming into the system for each person,
+the Location Producer Service is not bothered on storing the data in DB, rather it writes the data on to the Kafka
+stream's location Topic. There is no system requirement of location data being synchronous, because of which Kafka Queue
+based message passing is highly helpful. And thus it can produce high number if writes in Kafka, without throttling the DB.
+And the Location Consumer Service is not interacting with any other service, and just consumes each message
+written on the topic and writes that into the Postgres DB. This ensures the writes are seamless
+and the frontend or other services are waiting on this.

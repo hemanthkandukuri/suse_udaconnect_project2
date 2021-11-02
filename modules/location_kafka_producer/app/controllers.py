@@ -14,7 +14,7 @@ api = Namespace("Location API", description="Loacation API which puts data onto 
 
 @api.route("/locations")
 @api.route("/locations/<location_id>")
-@api.param("location_id", "Unique ID for a given Location", _in="query")
+@api.param("location_id", "Unique ID for a given Location", _in=" ")
 class LocationResource(Resource):
     @accepts(schema=LocationSchema)
     def post(self) -> Location:
