@@ -29,7 +29,7 @@ to its own docker image.
 This script takes care of seeding the postgres DB as well. 
   * Use the command. `sh deployment/deploy.sh`
 * `/deployment/deploy.sh` -  a utility shell file to delete all the deployments, deployed above, in a single go. 
-  * Use the command.`sh deployment/delete_all_deployments.sh.sh`
+  * Use the command.`sh deployment/delete_all_deployments.sh`
 * All the modules are published to my DockerHub account and the deployment files use the Kubernetes CRD to pull those 
 images while deployment. 
 
@@ -38,3 +38,9 @@ images while deployment.
 2. Persons API - http://localhost:30001
 3. Connection API - http://localhost:30002
 4. Location API - http://localhost:30004
+
+## Docker
+Each `module` has its own Dockerfile, this ensuring each module can be deployed into a pod and runs in a container.
+This Dockerfile is used by Github-Actions to build and push the respective module's image to DockerHub. 
+And the Kubernetes deployment files (CRDs) in `deployment` folder use these images (with a tagged version) to deploy 
+and run the pods and expose them via the services defined.
