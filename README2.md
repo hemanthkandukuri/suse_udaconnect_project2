@@ -39,8 +39,15 @@ images while deployment.
 3. Connection API - http://localhost:30002
 4. Location API - http://localhost:30004
 
-## Docker
+## Docker Builds & Images
 Each `module` has its own Dockerfile, this ensuring each module can be deployed into a pod and runs in a container.
 This Dockerfile is used by Github-Actions to build and push the respective module's image to DockerHub. 
 And the Kubernetes deployment files (CRDs) in `deployment` folder use these images (with a tagged version) to deploy 
 and run the pods and expose them via the services defined.
+
+* [connections_api_rest](https://hub.docker.com/repository/docker/hemanthkandukuri/connections_api_rest) hemanthkandukuri/connections_api_rest:v1.0.0
+* [frontend](https://hub.docker.com/repository/docker/hemanthkandukuri/frontend) hemanthkandukuri/frontend:v1.0.0
+* [location_kafka_consumer](https://hub.docker.com/repository/docker/hemanthkandukuri/location_kafka_consumer) hemanthkandukuri/location_kafka_consumer:v1.0.0
+* [location_kafka_producer](https://hub.docker.com/repository/docker/hemanthkandukuri/location_kafka_producer) hemanthkandukuri/location_kafka_producer:v1.0.0
+* [persons_api_grpc](https://hub.docker.com/repository/docker/hemanthkandukuri/persons_api_grpc) hemanthkandukuri/persons_api_grpc:v1.0.0
+* [persons_api_rest](https://hub.docker.com/repository/docker/hemanthkandukuri/persons_api_rest) hemanthkandukuri/persons_api_rest:v1.0.0

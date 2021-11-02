@@ -1,0 +1,29 @@
+Below is the proto file used. The same is found in persons_api_grp and connections_api_rest modules as well.
+
+Both the modules have grpc_client.py & grpc_client_2.py files to test the grpc server.
+
+syntax = "proto3";
+
+message PersonMessage {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string company_name = 4;
+}
+
+message Empty {}
+
+message ListOfPersonMessages {
+  repeated PersonMessage persons_list = 1;
+}
+
+service PersonService {
+  rpc Get(Empty) returns (ListOfPersonMessages);
+  rpc Create(PersonMessage) returns (PersonMessage);
+}
+
+=======================================================================================================================
+
+docker exec -it <pod name> - sh
+Using the above command we can get into interactive shell of a container, and we can run one of the client test file
+to test the GRPC service.
