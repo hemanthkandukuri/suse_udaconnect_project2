@@ -13,8 +13,6 @@ DATE_FORMAT = "%Y-%m-%d"
 api = Namespace("Persons API", description="Persons REST API implementation")  # noqa
 
 
-# TODO: This needs better exception handling
-
 @api.route("/persons")
 class PersonsResource(Resource):
     @accepts(schema=PersonSchema)

@@ -33,8 +33,9 @@ def save_in_db(location_json):
     conn.execute(insert_query)
 
 
-for location in consumer:
-    message = location.value.decode('utf-8')
-    print('{}'.format(message))
-    location_message_as_json = json.loads(message)
-    save_in_db(location_message_as_json)
+while True:
+    raw_messages = consumer.poll(timeout_ms=1000, max_records=5000)
+    for topic_partition, messages in raw_messages.items():
+        location_message_as_json = json.loads(messages.value.decode())
+        save_in_db(location_message_as_json)
+# referred the while loop block from, https://blog.datasyndrome.com/a-tale-of-two-kafka-clients-c613efab49df
